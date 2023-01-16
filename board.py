@@ -48,9 +48,11 @@ class Board(object):
     
     def shiftLeft(self):
         for i in range(len(self.board)):
-            for j in range(len(self.board[i]) - 1):
-                # this is the logic of shifting a number to the left 
-                value = self.board[i,j]
+            lastElement = self.board[i,3]
+            j = 2
+            # this is the logic of shifting a number to the left 
+            value = self.board[i,j] #last value 
+            if value > 0 and lastElement == 0:
                 self.board[i,j + 1] = value
                 self.board[i,j] = 0
 
