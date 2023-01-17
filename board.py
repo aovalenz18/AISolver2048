@@ -40,7 +40,26 @@ class Board(object):
             self.done = True
     
     def shiftRight(self):
+        for i in range(len(self.board)):
+            for j in range(len(self.board)-2, -1, -1 ):
+                value = self.board[i,j]
+                copyIndex = j
+                if value > 0: 
+                    done = False
+                    next = self.board[i,copyIndex+1]
+                    while not done:
+                        if next == 0:
+                            self.board[i,copyIndex+1] = value
+                            self.board[i, copyIndex] = 0
+                            copyIndex += 1
+                            if copyIndex == 3:
+                                done= True
+                            else:
+                                next = self.board[i,copyIndex+1]
+                        else:
+                            done = True
         return
+    
     def shiftUp(self):
         return
     def shiftDown(self):
@@ -48,12 +67,22 @@ class Board(object):
     
     def shiftLeft(self):
         for i in range(len(self.board)):
-            lastElement = self.board[i,3]
-            j = 2
-            # this is the logic of shifting a number to the left 
-            value = self.board[i,j] #last value 
-            if value > 0 and lastElement == 0:
-                self.board[i,j + 1] = value
-                self.board[i,j] = 0
+            for j in range(1,len(self.board)):
+                value = self.board[i,j]
+                copyIndex = j
+                if value > 0: 
+                    done = False
+                    next = self.board[i,copyIndex-1]
+                    while not done:
+                        if next == 0:
+                            self.board[i,copyIndex-1] = value
+                            self.board[i, copyIndex] = 0
+                            copyIndex -= 1
+                            if copyIndex == 0:
+                                done= True
+                            else:
+                                next = self.board[i,copyIndex-1]
+                        else:
+                            done = True
 
         return
